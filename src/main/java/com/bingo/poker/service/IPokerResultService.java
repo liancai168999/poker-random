@@ -30,5 +30,7 @@ public interface IPokerResultService extends IBaseService<PokerResult, PokerResu
 
     JsonResult queryByPageInfoRequest2(PageInfoRequest request) throws Exception;
 
+    boolean createAndValiTask() throws Exception;
+
     JsonResult decryptResults(PokerResultParam param);
 }

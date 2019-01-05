@@ -36,7 +36,15 @@ public class Task {
         logger.info("定时线程池任务 | 定时生成扑克牌（8幅） | 开始");
         PokerResultParam param = new PokerResultParam();
         param.setPokerNum(8);
-        JsonResult jsonObject = pokerResultService.createAndVali(param);
+        boolean flag = pokerResultService.createAndValiTask();
+        if (flag) {
+            logger.info("定时线程池任务 | 定时生成扑克牌（8幅） | 开始 | 进行");
+            JsonResult jsonObject = pokerResultService.createAndVali(param);
+            logger.info("定时线程池任务 | 定时生成扑克牌（8幅） | 结束 | 进行");
+        } else {
+            logger.info("定时线程池任务 | 定时生成扑克牌（8幅） | 结束 | 还未到上一个牌幅的数据，不更新下一牌幅");
+        }
+
         long start = System.currentTimeMillis();
         Thread.sleep(random.nextInt(10000));
         long end = System.currentTimeMillis();

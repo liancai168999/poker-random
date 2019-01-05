@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bingo.poker.mapper.IPokerResultMapper">
+    <resultMap id="baseResultMap" type="com.bingo.poker.domain.vo.PokerResultVo">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="poker_result" jdbcType="BLOB" property="pokerResult" />
+        <result column="poker_num" jdbcType="INTEGER" property="pokerNum" />
+        <result column="poker_public_key" jdbcType="CHAR" property="pokerPublicKey" />
+        <result column="poker_private_key" jdbcType="CHAR" property="pokerPrivateKey" />
+        <result column="poker_private_result" jdbcType="BLOB" property="pokerPrivateResult" />
+        <result column="create_time" jdbcType="CHAR" property="createTime" />
+    </resultMap>
+
+    <select id="getTop" resultMap="baseResultMap">
+        select * from poker_result order by create_time desc limit 1;
+    </select>
 
 </mapper>

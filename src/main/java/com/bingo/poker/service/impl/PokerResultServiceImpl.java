@@ -52,6 +52,9 @@ public class PokerResultServiceImpl extends BaseServiceImpl<IPokerResultMapper, 
     private IPokerTypeService pokerTypeService;
 
     @Autowired
+    private IPokerResultMapper pokerResultMapper;
+
+    @Autowired
     private PokerCommon pokerCommon;
 
  @Transactional(rollbackFor = Exception.class)
@@ -198,6 +201,16 @@ public class PokerResultServiceImpl extends BaseServiceImpl<IPokerResultMapper, 
         int dataId = this.createPokerResult(param);
         return JsonResult.build(ResultStatusEnum.OK.getCode(), "添加成功。", jsonObject);
     }
+
+    public boolean createAndValiTask() throws Exception{
+        PokerResultVo pokerResultVo = pokerResultMapper.getTop();
+        if (validateTime(pokerResultVo)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     public static List<String> getStrList(String inputString, int length,
                                           int size) {

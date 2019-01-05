@@ -25,7 +25,7 @@ public class PokerMakeTask {
     @Resource
     private Task task;
 
-    @Scheduled(fixedRate = 1000 * 60 * 60 * 2)
+    @Scheduled(fixedRate = 1000 * 60)
     public void prizeHistory() throws Exception {
         task.makePoker();
         //Thread.currentThread().join();

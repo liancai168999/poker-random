@@ -21,7 +21,10 @@
 		width: 1200px;
 		margin: 0 auto;
 	}
-
+	*{
+		font-size: 12px !important;
+		font-weight: normal ! important;
+	}
 	.warmp {
 		width: 1200px;
 		margin: 0 auto;
@@ -119,14 +122,14 @@
 		</div>
 		<div class="lottery_detail">
 
-			<div class="ibox-content" style="margin-bottom:0px;padding-bottom: 0;">
+			<div class="ibox-content" style="margin-bottom:0px;padding-bottom: 0;width:1200px;margin:0 auto;">
 				<table class="table table-bordered" style="text-align:center;">
 					<thead>
 						<tr>
 							<th style='text-align: center;'>编号</th>
 							<th style='text-align: center;'>创建时间</th>
 							<th style='text-align: center;'>密文</th>
-							<th style='text-align: center;'>解密钥匙</th>
+							<th style='text-align: center;' style='width:200px;'>解密钥匙</th>
 							<th style='text-align: center;'>第三方解密</th>
 							<th style='text-align: center;'>文字验证</th>
 							<th style='text-align: center;'>图片验证</th>
@@ -281,26 +284,26 @@
 						new_tr += "<tr>" +
 							"<td ' style='width:100px;' rowspan=" + (list.length - 1) + " >" + res.id + "</td>" +
 							"<td ' style='width:200px;' rowspan=" + (list.length - 1) + " >" + res.createTime + "</td>" +
-							"<td style='padding-top:20px;'><div >" + list[0] + "</div></td>" +
-							"<td rowspan=" + (list.length - 1) + ">" + result_img + "</td>" +
-							"<td style='width:360px;' rowspan=" + (list.length - 1) + " >" +
+							"<td style='padding-top:20px;font-size:12px;'><div >" + list[0] + "</div></td>" +
+							"<td style='width:300px;' rowspan=" + (list.length - 1) + ">" + result_img + "</td>" +
+							"<td style='width:500px;' rowspan=" + (list.length - 1) + " >" +
 							"<select class='sel'>"
 
 						console.log(res.url.split(','))
 						res.url.split(',').map(function (res) {
-							new_tr += "<option value='" + res + "'>" + res + "</option>"
+							new_tr += "<option style='font-size:12px;font-weight:0;' value='" + res + "'>" + res + "</option>"
 						})
 
 						new_tr += "</select>" +
 							"<span class='pre'><a href=" + res.url +
 							" style='display:inline-block;color:white;' target='_blank'>前往</a></span>" +
 							"</td>" +
-							"<td style='width:160px;' rowspan=" + (list.length - 1) + " ><span class='text_ver'>文字验证</span></td>" +
-							"<td style='width:160px;' rowspan=" + (list.length - 1) + " ><span class='pic_ver'>图片验证</span></td>" +
+							"<td style='width:120px;' rowspan=" + (list.length - 1) + " ><span class='text_ver'>文字验证</span></td>" +
+							"<td style='width:120px;' rowspan=" + (list.length - 1) + " ><span class='pic_ver'>图片验证</span></td>" +
 							"</tr>"
 						for (var i = 1; i < list.length - 1; i++) {
 							new_tr += "<tr>" +
-								"<td style='width:1260px;padding-top:20px;'><div >" + list[i] + "</div></td>" +
+								"<td style='width:1260px;padding-top:20px;padding:2px;font-weight:none !important;font-size:12px !important;'><div >" + list[i] + "</div></td>" +
 								"</tr>"
 						}
 					})
