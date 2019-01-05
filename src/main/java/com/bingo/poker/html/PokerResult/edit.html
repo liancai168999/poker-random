@@ -1,0 +1,86 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script th:src="@{/static/js/jquery.min.js}"></script>
+</head>
+
+<body class="gray-bg">
+<div class="row dashboard-header">
+
+    <div class="col-sm-12">
+
+        <form id="pokerResult_form" method="post" class="form-horizontal">
+            <input type="hidden" name="id" th:value="${record.id}"/>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">：</label>
+
+                <div class="col-sm-9">
+                    <input type="text" name="id" id="id" th:value="${record.id}" placeholder="" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">发牌结果集：</label>
+
+                <div class="col-sm-9">
+                    <input type="text" name="pokerResult" id="pokerResult" th:value="${record.pokerResult}" placeholder="发牌结果集" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">出牌时的牌幅数量：</label>
+
+                <div class="col-sm-9">
+                    <input type="text" name="pokerNum" id="pokerNum" th:value="${record.pokerNum}" placeholder="出牌时的牌幅数量" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">修改时间：</label>
+
+                <div class="col-sm-9">
+                    <input type="text" name="modifyTime" id="modifyTime" th:value="${record.modifyTime}" placeholder="修改时间" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">公布明文结果解密时所需密钥：</label>
+
+                <div class="col-sm-9">
+                    <input type="text" name="pokerSecret" id="pokerSecret" th:value="${record.pokerSecret}" placeholder="公布明文结果解密时所需密钥" class="form-control">
+                </div>
+            </div>
+
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <div class="col-sm-4 col-sm-offset-2">
+                    <button class="btn btn-primary" id="pokerResult_primary" type="button">保存内容</button>
+                    <button class="btn btn-white" type="button">取消</button>
+                </div>
+            </div>
+        </form>
+        <hr>
+    </div>
+
+</div>
+
+<script type="application/javascript">
+    $(document).ready(function() {
+
+        $("#pokerResult_primary").click(function () {
+
+            bg.postForm("/pokerResult/edit", $("#pokerResult_form"), "pokerResult");
+
+        });
+
+    });
+
+</script>
+
+<script th:src="@{/js/plugins/sweetalert2/sweetalert2.all.js}"></script>
+<script th:src="@{/js/CommonUtils.js}"></script>
+<script th:src="@{/js/ajaxCallbackError.js}"></script>
+
+</body>
+</html>

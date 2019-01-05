@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>记录</title>
+	<link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/index.css" />
+	<link rel="stylesheet" href="css/page.css" />
+	<script src="js/jquery.min.js"></script>
+	<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+	<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+	<link href="css/animate.css" rel="stylesheet">
+	<link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link rel="stylesheet" href="./css/paginat.css">
+	<link rel="stylesheet" href="./css/iconfont.css">
+	<link href="css/toastr.min.css" rel="stylesheet">
+</head>
+<style type="text/css">
+	.warp {
+		width: 1200px;
+		margin: 0 auto;
+	}
+
+	.warmp {
+		width: 1200px;
+		margin: 0 auto;
+		background: #FFFFFF;
+		height: 800px;
+		margin-top: 100px;
+		position: relative;
+		overflow-x: scroll;
+
+	}
+
+	.list {
+		padding-top: 30px;
+		font-size: 24px;
+		font-weight: 400;
+		color: rgba(0, 0, 0, 1);
+	}
+
+	.list_detail {
+		padding-top: 30px;
+		font-size: 24px;
+		font-family: MicrosoftYaHei;
+		font-weight: 400;
+		color: rgba(0, 0, 0, 1);
+		line-height: 35px;
+	}
+
+	.modal {
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		top: 0px;
+		left: 0;
+		background: rgba(0, 0, 0, .3);
+		display: none;
+	}
+
+	.modal_pic {
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		top: 0px;
+		left: 0;
+		background: rgba(0, 0, 0, .3);
+		display: none;
+	}
+
+	.close {
+		position: absolute;
+		right: 10px;
+		top: 10px;
+	}
+
+	.close img {
+		width: 28px;
+		height: 28px;
+	}
+</style>
+
+<body>
+	<div id="container">
+		<div class="header">
+			<div class="header_warp">
+				<div class="logo"><img src="./img/chain_game.png" /></div>
+				<div class="button"><img src="img/btn_jieguo .png" /></div>
+				<a href='.' class="index" style='line-height: 100px;'><img src="./img/shape.png" style='position: relative;top:-18px;' />主页</a>
+			</div>
+		</div>
+		<div class="warp" style="margin-top:100px;">
+			<div class="record_head">
+				<div class="select">
+					<select id="select">
+						<option value="0">区块链百家乐</option>
+						<option value="1">龙斗虎</option>
+						<option value="2">江苏快三</option>
+					</select>
+				</div>
+				<div class="data">
+					<input class="datainp" id="datebut" type="text" placeholder="请选择日期" readonly onClick="jeDate({dateCell:'#datebut',isTime:true,format:'YYYY-MM-DD'})"><i
+					 onClick="jeDate({dateCell:'#datebut',isTime:true,format:'YYYY-MM-DD'})"></i></div>
+				<div class="ico">
+					<img src="img/gou.png" alt="" />
+					<span>人字房</span>
+				</div>
+				<div class="ico" style="padding-left:80px;">
+					<img src="img/yuan.png" alt="" />
+					<span>地字房</span>
+				</div>
+				<div class="ico" style="padding-left:80px;">
+					<img src="img/yuan.png" alt="" />
+					<span>天字房</span>
+				</div>
+				<button id='update' class='btn btn-primary' style='float:right;background:#fabf37;border: 1px solid #fabf37'>更新</button>
+			</div>
+		</div>
+		<div class="lottery_detail">
+
+			<div class="ibox-content" style="margin-bottom:0px;padding-bottom: 0;">
+				<table class="table table-bordered" style="text-align:center;">
+					<thead>
+						<tr>
+							<th style='text-align: center;'>编号</th>
+							<th style='text-align: center;'>创建时间</th>
+							<th style='text-align: center;'>密文</th>
+							<th style='text-align: center;'>解密钥匙</th>
+							<th style='text-align: center;'>第三方解密</th>
+							<th style='text-align: center;'>文字验证</th>
+							<th style='text-align: center;'>图片验证</th>
+						</tr>
+					</thead>
+					<tbody class='result_list'>
+					</tbody>
+				</table>
+				<div style='text-align: center;'>
+					<div id="pagination" class="pagination"></div>
+				</div>
+			</div>
+
+
+
+			<!-- <table>
+				<thead>
+					<tr>
+						<th style='width:100px;'>创建时间</th>
+						<th>密文</th>
+						<th>解密钥匙</th>
+						<th>第三方解密</th>
+						<th>文字验证</th>
+						<th>图片验证</th>
+					</tr>
+				</thead>
+				<tbody class="result_list">
+					<tr>
+						<td style='width:200px;'>00:30:21</td>
+						<td style="padding-top:10px;">
+							<div>
+
+							</div>
+						</td>
+						<td style="color:#FF0000;padding:19px;"><span class="hour">00:</span><span class="minute">32:</span><span class="second">21</span>后公布</td>
+						<td style="color:#FF0000;padding:19px;">
+							<select class="sel">
+								<option value="0">www. GitHub.cn</option>
+								<option value="1">www.baidu,com</option>
+								<option value="2">www.dsfhsl.com</option>
+							</select>
+							<span class="pre">前往</span>
+						</td>
+						<td><span class="text_ver">文字验证</span></td>
+						<td><span class="pic_ver">图片验证</span></td>
+					</tr>
+				</tbody>
+			</table> -->
+		</div>
+
+		<div class="modal">
+			<div class="warmp">
+				<div class="close"><img src="img/close.png" alt="" /></div>
+				<div class="mask" style="margin:0 auto;padding:20px;">
+					<div class="list">本局牌序:</div>
+					<div class="list_detail">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal_pic">
+			<div class="warmp">
+				<div class="close"><img src="img/close.png" alt="" /></div>
+				<div class="mask" style="margin:0 auto;padding:20px;">
+					<div class="list">本局牌序:</div>
+					<div class="list_detail">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+<script src='js/paginat.js'></script>
+<script src="js/toastr.min.js"></script>
+<script>
+	//	var numArr = []
+	$(document).ready(function () {
+		$(".ico img").each(function () {
+			$(this).click(function () {
+				console.log(12)
+				$(this).toggleClass("current")
+			})
+		})
+		$(".close").click(function () {
+			$(".modal").hide()
+		})
+		var pageNo = 1;
+		var pageSize = 2;
+		getsult()
+
+		function getsult() {
+			$.ajax({
+				"url": '/dealcard/poker/result/query',
+				"type": "post",
+				"data": JSON.stringify({
+					"pageNo": pageNo,
+					"pokerNum": 8,
+					"pageSize": pageSize,
+					sort: [{
+						field: "id",
+						sort: "desc"
+					}]
+				}),
+				"contentType": "application/json;charset=utf-8",
+				'dataType': 'json',
+				"success": function (backData) {
+					console.log(backData)
+					var new_tr = "";
+					backData.data.list.map(function (res) {
+						new Paginat({
+							target: 'pagination',
+							dataTotal: backData.data.total,
+							pageAmountList: [10, 15, 20, 30, 40, 50],
+							curPage: pageNo,
+							pageSize: '7',
+							pageTotal: Math.ceil(backData.data.total / pageSize),
+							pageAmount: pageSize,
+							getPage: function (index) {
+								pageNo = index
+								curPage = index
+								getsult()
+								$(document).scrollTop(0)
+							},
+							getPageAmount: function (index, index1) {
+								pageSize = index;
+								if (index1) {
+									pageNo = index1
+									curPage = index1
+									$(document).scrollTop(0)
+									getsult()
+								}
+							}
+						})
+						if (res.publishStatus !== "unPublish") {
+
+							result_img = "<div class='pokerPublicKey'>" + res.pokerPublicKey + "</div>"
+
+						} else {
+							// console.log(res.pokerPublicKey)
+							console.log(res.pokerPublicKey)
+							time_s1 = getCountDown(res.pokerPublicKey);
+							console.log(time_s1)
+							result_img =
+								time_s1 + "后公布";
+						}
+						var list = res.pokerPrivateResult.split("?43#@")
+						new_tr += "<tr>" +
+							"<td ' style='width:100px;' rowspan=" + (list.length - 1) + " >" + res.id + "</td>" +
+							"<td ' style='width:200px;' rowspan=" + (list.length - 1) + " >" + res.createTime + "</td>" +
+							"<td style='padding-top:20px;'><div >" + list[0] + "</div></td>" +
+							"<td rowspan=" + (list.length - 1) + ">" + result_img + "</td>" +
+							"<td style='width:360px;' rowspan=" + (list.length - 1) + " >" +
+							"<select class='sel'>"
+
+						console.log(res.url.split(','))
+						res.url.split(',').map(function (res) {
+							new_tr += "<option value='" + res + "'>" + res + "</option>"
+						})
+
+						new_tr += "</select>" +
+							"<span class='pre'><a href=" + res.url +
+							" style='display:inline-block;color:white;' target='_blank'>前往</a></span>" +
+							"</td>" +
+							"<td style='width:160px;' rowspan=" + (list.length - 1) + " ><span class='text_ver'>文字验证</span></td>" +
+							"<td style='width:160px;' rowspan=" + (list.length - 1) + " ><span class='pic_ver'>图片验证</span></td>" +
+							"</tr>"
+						for (var i = 1; i < list.length - 1; i++) {
+							new_tr += "<tr>" +
+								"<td style='width:1260px;padding-top:20px;'><div >" + list[i] + "</div></td>" +
+								"</tr>"
+						}
+					})
+					$(".result_list").html(new_tr)
+					$(".pic_ver").each(function (index) {
+						$(this).click(function () {
+							console.log(index)
+							var pokerPublicKey = backData.data.list[index].pokerPublicKey
+							console.log(backData.data.list[index].pokerPublicKey)
+							$.ajax({
+								"url": '/dealcard/poker/result/decrypt',
+								"type": "post",
+								"data": JSON.stringify({
+									pokerPublicKey: pokerPublicKey
+								}),
+								"contentType": "application/json;charset=utf-8",
+								"dataType": 'json',
+								"success": function (backdata) {
+									var new_num = "";
+									console.log(backdata.data.pokerResults.replace(/\[/gm, ""))
+
+									var result = backdata.data.pokerResults.replace(/\[/gm, "").replace(/\]/gm, "").split(',');
+									console.log(result)
+									var html = ''
+									$(".modal").show()
+									var j = 1;
+									for (var i = 0; i < result.length; i++) {
+										if (i % 52 == 0) {
+											html += '<div style="text-align:center;">第' + j + '副牌</div>'
+											j++
+										}
+										html += '<span style="width:11%;display:inline-block;"><img src="./img/' + result[i].slice(result[
+											i].length - 3, result[i].length) + '.png"/></span>'
+									}
+									new_num += "<span>" + result + "</span>"
+									$(".list_detail").html(html)
+								}
+
+							})
+
+						})
+					})
+					$(".text_ver").each(function (index) {
+						$(this).click(function () {
+							// console.log(12)
+							console.log(index)
+							var pokerPublicKey = backData.data.list[index].pokerPublicKey
+							console.log(backData.data.list[index].pokerPublicKey)
+							$.ajax({
+								"url": '/dealcard/poker/result/decrypt',
+								"type": "post",
+								"data": JSON.stringify({
+									pokerPublicKey: pokerPublicKey
+								}),
+								"contentType": "application/json;charset=utf-8",
+								"dataType": 'json',
+								"success": function (backdata) {
+									var new_num = "";
+									console.log(backdata.data.pokerResults.replace(/\[/gm, ""))
+
+									var result = backdata.data.pokerResults.replace(/\[/gm, "").replace(/\]/gm, "").split(',');
+									console.log(result)
+									var html = ''
+									$(".modal").show()
+									var j = 1;
+									for (var i = 0; i < result.length; i++) {
+										if (i % 52 == 0) {
+											html += '<div style="text-align:center;">第' + j + '副牌</div>'
+											j++
+										}
+										html += '<span style="width:11%;display:inline-block;">' + result[i] + '</span>'
+									}
+									new_num += "<span>" + result + "</span>"
+									$(".list_detail").html(html)
+								}
+
+							})
+
+						})
+					})
+				}
+			})
+		}
+
+		$(document).click(function () {
+			$('.modal').hide()
+		})
+		$('.mask').click(function (ev) {
+			ev.stopPropagation()
+		})
+
+		function getCountDown(timestamp) {
+			// timestamp -= 1000;
+			var hour = Math.floor(timestamp / 1000 / 60 / 60 % 24);
+			var min = Math.floor(timestamp / 1000 / 60 % 60);
+			var sec = Math.floor(timestamp / 1000 % 60);
+
+			if (hour < 10) {
+				hour = "0" + hour;
+			}
+			if (min < 10) {
+				min = "0" + min;
+			}
+			if (sec < 10) {
+				sec = "0" + sec;
+			}
+
+			if (timestamp <= 1000) {
+				var countDownTime = "00:00:00";
+			} else {
+				var countDownTime = hour + ":" + min + ":" + sec;
+			}
+			return countDownTime
+		}
+		$('#update').click(function () {
+			pageNo = 1;
+			getsult()
+		})
+	})
+</script>

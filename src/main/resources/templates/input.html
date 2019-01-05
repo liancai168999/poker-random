@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>基本信息</title>
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="static/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/css/font-awesome.css" rel="stylesheet">
+  <link href="static/css/animate.css" rel="stylesheet">
+  <link href="static/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/paginat.css">
+  <link rel="stylesheet" href="static/css/iconfont.css">
+  <link href="static/css/toastr.min.css" rel="stylesheet">
+  <style>
+    button {
+				margin-left: 4px;
+			}
+      /* .toast-message{
+        width: 800px;
+      } */
+      .toast-top-center{
+        width: 800px;
+      }
+		</style>
+</head>
+
+<body class="gray-bg">
+
+
+  <!-- 全局js -->
+  <script src="static/js/jquery.min.js"></script>
+  <script src="static/js/bootstrap.min.js"></script>
+</body>
+<form class="form-horizontal m-t">
+  <div class="form-group">
+    <input type="button" class='btn btn-primary' style='margin-left:40px;' value="点击获取牌幅" data-toggle='modal' data-target='#userInfoModal'>
+  </div>
+</form>
+<div class="ibox-content" style="margin-bottom:0px;padding-bottom: 0;">
+  <table class="table table-bordered" style="text-align:center;">
+    <thead>
+      <tr>
+        <th style='text-align: center;'>编号</th>
+        <th style='text-align: center;'>牌幅数量</th>
+        <th style='text-align: center;'>公钥</th>
+        <th style='text-align: center;'>加密牌幅数据集</th>
+        <th style='text-align: center;'>创建时间</th>
+        <th style='text-align: center;'>状态</th>
+      </tr>
+    </thead>
+    <tbody id='releasetableHtml'>
+    </tbody>
+  </table>
+  <div style='text-align: center;'>
+    <div id="pagination" class="pagination"></div>
+  </div>
+</div>
+<div class="modal inmodal fade" id="userInfoModal" tabindex="-1" role="dialog" aria-hidden="true">
+
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id='handleMess'>添加</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal m-t">
+          <div class="form-group">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label class=" col-sm-5  control-label" id='handleMany'>牌幅数量</label>
+                <div class="col-sm-7 ">
+                  <input type="text" class='form-control' id='num' placeholder="输入牌幅数量">
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" id='save'>保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</html>
+<script src='static/js/paginat.js'></script>
+<script src="static/js/toastr.min.js"></script>
+<script>
+  var toastCount = 0;
+  var $toastlast;
+  var getMessage = function () {
+    var msg = 'Hi, welcome to Inspinia. This is example of Toastr notification box.';
+    return msg;
+  };
+  toastr.options = {
+    "closeButton": true,
+    "debug": true,
+    "progressBar": false,
+    "positionClass": "toast-top-center",
+    "showDuration": "100000000",
+    "hideDuration": "1000",
+    "timeOut": "3000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  }
+  var shortCutFunction = 'success'
+  var msg = '密码修改成功'
+  var title = ' 成功'
+  var toastIndex = toastCount++;
+  $('#save').click(function () {
+    $.ajax({
+      "type": "post",
+      "url": HostName + '/game/dealcard/poker/result/add',
+      "dataType": "json",
+      "contentType": "application/json;charset=UTF-8",
+      "data": JSON.stringify({
+        "pokerNum": Number($('#num').val()),
+      }),
+      "success": function (backData) {
+        alert(backData.statusMsg + "encrypt：" + backData.data.encrypt + "\n" + "decrypt：" + backData.data.decrypt)
+        // var $toast = toastr[shortCutFunction](backData.statusMsg + "encrypt：" + backData.data.encrypt + "\n" + "decrypt："+backData.data.decrypt, backData.statusMsg);
+      }
+    })
+  })
+  var pageNo = 1;
+  var pageSize = 5;
+  var HostName = 'http://192.168.31.122:8088'
+  getuserData()
+  function getuserData() {
+    $.ajax({
+      "type": "post",
+      "url": HostName + '/game/dealcard/poker/result/query',
+      "dataType": "json",
+      "contentType": "application/json;charset=UTF-8",
+      "data": JSON.stringify({
+        "pageNo": pageNo,
+        "pageSize": pageSize,
+      }),
+      "success": function (backData) {
+        if (backData.data.total) {
+          new Paginat({
+            target: 'pagination',
+            dataTotal: backData.data.total,
+            pageAmountList: [10, 15, 20, 30, 40, 50],
+            curPage: pageNo,
+            pageSize: '7',
+            pageTotal: Math.ceil(backData.data.total / pageSize),
+            pageAmount: pageSize,
+            getPage: function (index) {
+              pageNo = index
+              curPage = index
+              getuserData()
+            },
+            getPageAmount: function (index, index1) {
+              pageSize = index;
+              if (index1) {
+                pageNo = index1
+                curPage = index1
+                getuserData()
+              }
+            }
+          })
+          var Html = ''
+          backData.data.list.map(function (res) {
+            Html += '<tr>'
+            Html += '<td>' + res.id + '</td>'
+            Html += '<td>' + res.pokerNum + '</td>'
+            Html += '<td>' + res.pokerPublicKey + '</td>'
+            Html += '<td>' + res.createTime + '</td>'
+            Html += '<td>' + res.createTime + '</td>'
+            Html += '<td>' + res.tbStatus + '</td>'
+            Html += '</tr>'
+          })
+          $('#releasetableHtml').html(Html)
+        }
+      }
+    })
+  }
+</script>

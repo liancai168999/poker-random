@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>记录</title>
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/index.css" />
+		<link rel="stylesheet" href="css/page.css" />
+	</head>
+	<style>
+	.top{
+		margin-top:100px;
+		width:100%;
+		height:56px;
+		line-height:56px;
+		border-bottom:2px solid #E1E1E1;
+		font-size:24px;
+		font-weight:400;
+		color:rgba(0,0,0,1);
+	}
+	.time{
+		font-size:24px;
+		color:#000000;
+		padding-top:33px;
+	}
+	.time span{	
+		color:#FF0000;
+	}
+	.list{
+		padding-top:30px;
+		font-size:24px;
+		font-weight:400;
+		color:rgba(0,0,0,1);
+	}
+	.list_detail{
+		padding-top:30px;
+		font-size:24px;
+		font-family:MicrosoftYaHei;
+		font-weight:400;
+		color:rgba(0,0,0,1);
+		line-height:35px;
+	}
+	.warp{
+		width:1200px;
+		margin:0 auto;
+		background:#FFFFFF;
+		height:800px;
+		margin-top:100px;
+		position: relative;
+	}
+	.modal{
+		width:100%;
+		height:100%;
+		position:fixed;
+		top:0px;
+		left:0;
+		background:rgba(0,0,0,.3)
+	}
+	.close{
+		position:absolute;
+		right:10px;
+		top:10px;
+	}
+	.close img{
+		width: 28px;
+		height:28px;
+	}
+	</style>
+	<body>
+		<div id="container">
+			<div class="header">
+				<div class="header_warp">
+					<div class="logo"><img src="./img/chain_game.png"/></div>
+				    <div class="quit"><img src="./img/quit.png"/><span>退出</span></div>
+				    <div class="index"><img src="./img/shape.png"/><span>主页</span></div>
+				</div>
+			</div>
+			<!--<div class="top">
+				<div class="warp">
+				链彩游戏>主页>文字验证
+				</div>
+			</div>-->
+
+				<!--<div class="time">本局牌序产生时间：<span>2018-12-12 13:45:20</span></div>-->
+			<div class="modal">
+				<div class="warp">
+					<div class="close"><img src="img/close.png" alt="" /></div>
+				    <div class="mask" style="margin:0 auto;padding-left:130px;padding-top:200px;">
+						<div class="list">本局牌序:</div>
+							<div class="list_detail">
+								<span>“红桃K”，</span><span>“方片6”，</span><span>“红桃5”，</span><span>“黑桃J”，</span><span>“红桃K”</span>，<span>“方片6”，</span><span>“红桃5”，</span><br />
+								<span>“黑桃J”，</span><span>“红桃K”，</span><span>“方片6”，</span><span>“红桃5”，</span><span>“黑桃J”，</span><span>“红桃K”，</span><span>“方片6”，</span><br />
+								<span>“红桃5”，</span><span>“黑桃J”，</span><span>“红桃K”，</span><span>“方片6”，</span><span>“红桃5”，</span><span>“黑桃J”，</span><span>“红桃K”，</span><br />
+								<span>“方片6”，</span><span>“红桃5”，</span><span>“黑桃J”，</span><span>“红桃K”，</span><span>“方片6”，</span><span>“红桃5”，</span><span>“黑桃J”，</span><br />
+								<span>“红桃K”，</span><span>“方片6”，</span><span>“红桃5”，</span><span>“黑桃J”，</span><span>“红桃K”，</span><span>“方片6”，</span><span>“红桃5”，</span><br />
+								<span>“黑桃J”，</span><span>“红桃K”，</span><span>“方片6”，</span><span>“红桃5”，</span><span>“黑桃J”，</span><span>“红桃K”，</span><span>“方片6”，</span><br />
+								<span>“红桃5”，</span><span>“黑桃J”
+								</span>
+							</div>
+					</div>
+				</div>
+			</div>
+	    </div>
+	</body>
+</html>

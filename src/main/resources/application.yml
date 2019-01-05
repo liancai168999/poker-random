@@ -1,0 +1,43 @@
+server:
+  port: 8088
+  servlet:
+    context-path: /dealcard
+
+spring:
+  profiles: #多环境配置
+    active: dev
+  messages: #国际化配置
+    encoding: utf-8
+    basename: i18n/messages
+  devtools: #热启动
+    restart:
+      enabled: true
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates
+    suffix: .html
+    encoding: UTF-8
+  mvc: 
+    throw-exception-if-no-handler-found: true  #出现错误时, 直接抛出异常
+  main:
+    allow-bean-definition-overriding: true
+
+  resources:
+    static-locations: classpath:/static/
+
+mybatis:
+  # 映射文件所在路径
+  mapper-locations: classpath:mapper/*.xml
+  # pojo类所在包路径
+  type-aliases-package: com.bingo.user.domain
+prefix: 
+  app:
+  service: /s
+  admin: /b
+#阿里云
+alibabacloud:
+  EndPoint: http://oss-cn-hongkong.aliyuncs.com
+  AccessKeyID: LTAIq8MfyThtdBmZ
+  AccessKeySecret: XS3kSzYABY2Oc4MShuZon0Ubx0cz6X
+  BucketName: rstpic
+  ContentType: image/bmp,image/gif,image/jpeg,image/jpg

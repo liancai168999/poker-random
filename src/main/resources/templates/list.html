@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>基本信息</title>
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/font-awesome.css" rel="stylesheet">
+  <link href="css/animate.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <style>
+    button {
+				margin-left: 4px;
+			}
+		</style>
+</head>
+
+<body class="gray-bg">
+
+
+  <!-- 全局js -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+</body>
+<form class="form-horizontal m-t">
+  <div class="form-group">
+    <div class="col-sm-4">
+      <div class="input-group">
+        <!-- /钱包地址/邀请码 -->
+        <input type="text" class="form-control" id='userSerachhtml' placeholder="搜索框"> <span class="input-group-btn">
+          <button type="button" id='userSearch' class="btn btn-primary" data-toggle='modal' data-target='#userInfoModal'>按钮
+          </button> </span>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="ibox-content" style="margin-bottom:0px;padding-bottom: 0;">
+  <table class="table table-bordered" style="text-align:center;">
+      <thead>
+          <tr>
+              <th style='text-align: center;'>编号</th>
+              <th style='text-align: center;'>标题</th>
+              <th style='text-align: center;'>公告类型</th>
+              <th style='text-align: center;'>公告插入行</th>
+              <th style='text-align: center;'>Banner图</th>
+              <th style='text-align: center;'>网址</th>
+              <th style='text-align: center;'>上线时间</th>
+              <th style='text-align: center;'>下线时间</th>
+              <th style='text-align: center;'>状态</th>
+              <th style='text-align: center;'>操作</th>
+              <th style='text-align: center;'>操作人员</th>
+          </tr>
+      </thead>
+      <tbody id='releasetable'>
+        <tr>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+        </tr>
+      </tbody>
+  </table>
+
+</div>
+<div class="modal inmodal fade" id="userInfoModal" tabindex="-1" role="dialog" aria-hidden="true">
+
+  <div class="modal-dialog modal-md">
+    <div class="modal-content" class='modaldiv'>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id='handleMess'>充值</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal m-t">
+          <div class="form-group">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label class=" col-sm-5  control-label" id='handleMany'>充值金额</label>
+                <div class="col-sm-7 ">
+                  <input type="text" class='form-control' id='money' placeholder="输入金额">
+                </div>
+
+              </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" id='savemoney'>保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</html>
+<script>
+</script>

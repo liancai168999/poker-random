@@ -1,0 +1,92 @@
+
+.results_total .page{
+    list-style: none;
+    margin-bottom: 50px;
+    text-align: center;
+}
+.page>li{
+    float: left;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size:16px;
+    border-radius: 6px;
+}
+.page .pageItem{
+    border: solid thin #DDDDDD;
+    margin: 5px;
+}
+.page .pageItemActive{
+  /*  border: solid thin #DC2325;*/
+    margin: 5px;
+    background-color: #FD8500;
+    color:white;
+}
+.page .pageItem:hover{
+  /*  border: solid thin #DC2325;*/
+    background-color: #FD8500;
+    color:white;
+}
+.page .pageItemDisable{
+    border: solid thin #DDDDDD;
+    margin: 5px;
+   border-radius: 6px;
+    cursor:not-allowed;
+}
+.paging{
+	width: 800px;
+	display: inline-block;
+	height: 100px;
+	margin-top: 20px;
+}
+.pages_s{
+	height: 40px;
+	width: 480px;
+    float: left;
+}
+.pages_a{
+	float: left;
+	line-height: 40px;
+	color: #333;
+	font-size: 16px;
+	margin-left: 10px;
+}
+.pages_s ul{
+	float: left;
+}
+
+.pages_num{
+	float: left;
+	height: 40px;
+	line-height: 40px;
+	width: 100px;
+}
+.pages_num select{
+	height: 33px;
+	line-height: 33px;
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	color: #333;
+	font-size: 14px;
+	float: left;
+	margin-top: 5px;
+}
+.page_target{
+	float: left;
+	width: 200px;
+	font-size: 14px;
+	color: #333;
+	margin-top: 5px;
+	text-align: left;
+}
+.page_target input{
+	width: 50px;
+	height: 33px;
+	line-height: 33px;
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	text-align: center;
+	outline: none;
+}
+.page_target_btn{
+	cursor: pointer;
+}

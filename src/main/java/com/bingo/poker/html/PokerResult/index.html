@@ -1,0 +1,223 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>出牌结果表</title>
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link th:href="@{/static/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/static/css/font-awesome.css}" rel="stylesheet">
+
+    <link th:href="@{/static/css/animate.css}" rel="stylesheet">
+    <link th:href="@{/static/css/style.css}" rel="stylesheet">
+
+    <script th:src="@{/static/js/jquery.min.js}"></script>
+
+    <!--begin: kendoUI-->
+    <link th:href="@{/static/js/plugins/kendoUI/styles/kendo.bootstrap-v4.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/static/js/plugins/kendoUI/styles/kendo.mobile.all.min.css.map}" rel="stylesheet" type="text/css"/>
+    <!--end: kendoUI-->
+
+</head>
+
+<body class="gray-bg">
+<div class="row  dashboard-header">
+
+    <div class="row m-b-sm m-t-sm">
+        <div class="col-md-5 m-l-sm">
+            <button type="button" id="pokerResult_add" class="btn btn-w-m btn-primary btn-sm">添加</button>
+            <button type="button" id="pokerResult_export" class="btn btn-w-m btn-success btn-sm">导出</button>
+
+        </div>
+        <div class="col-md-2">
+            <div class="">
+                <select class="form-control" id="search_key">
+                    <option value="wallet_address">钱包地址</option>
+                    <option value="balance">TYT金额</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="">
+                <select class="form-control" id="search_eq">
+                    <option value="=">=</option>
+                    <option value=">=">>=</option>
+                    <option value="<="><=</option>
+                    <option value=">">> </option>
+                    <option value=">">< </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="input-group">
+                <input type="text" id="pokerResult_search_text" placeholder="请输入搜索内容" class="input-sm form-control">
+                <span class="input-group-btn"><button type="button" id="pokerResult_search_btn" class="btn btn-sm btn-primary"> 搜索</button> </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+
+        <div id="pokerResult_grid"></div>
+
+        <hr>
+    </div>
+
+    <div id="pokerResult_modify_dialog" style="display: none;"></div>
+    <div id="pokerResult_detail_dialog" style="display: none;"></div>
+
+    <script id="pokerResult_action_template" type="text/x-kendo-template">
+
+        <button class="btn btn-outline blue-chambray" onclick="detailPokerResult('#: id #')"  style="padding: 1px 3px;">详情</button>
+
+        <button class="btn btn-outline blue-chambray" onclick="modifyPokerResult('#: id #')"  style="padding: 1px 3px 1px 3px;">编辑</button>
+
+        <button class="btn btn-outline blue-chambray" onclick="deletePokerResult('#: id #')" style="padding: 1px 3px 1px 3px;">删除</button>
+
+    </script>
+
+</div>
+
+<script type="application/javascript">
+    $(document).ready(function() {
+
+        var _pokerResult_grid = $("#pokerResult_grid");
+        var pokerResult_grid = _pokerResult_grid.kendoGrid({
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: {
+                        url: "/v1/pokerResult/query",
+                        type: "POST",
+                        dataType: "json",
+                        contentType:"application/json"
+                    },
+                    parameterMap: function(options, operation) {
+                        return JSON.stringify(options);
+                    }
+                },
+                schema: {
+                    data: "data.list",
+                    total: "data.total",
+                    model: {
+                        id: "id",
+                        fields: {
+                                 id: { type: "string" },
+                                 pokerResult: { type: "string" },
+                                 pokerNum: { type: "string" },
+                                 modifyTime: { type: "string" },
+                                 pokerSecret: { type: "string" },
+                            createTime: { type: "string" }
+                        }
+                    }
+                },
+                requestEnd: function(e) {
+                    if(e.response!=null){
+                        var r = e.response;
+                        if(200 != r.status && "OK" != r.statusMsg){
+                            return;
+                        }
+                    }
+                    if (e.type == "create" || e.type == "update") {
+                        this.read();
+                    }
+                },
+                pageSize: 10,
+                serverPaging: true,
+                serverFiltering: true,
+                serverSorting: true
+            },
+            //height: "100%",
+            sortable:  {
+                mode: "multiple",
+                allowUnsort: true,
+                showIndexes: true
+            },
+            selectable: true,
+            pageable: {
+                refresh: true,
+                input:true,
+                pageSizes : [5,10,20,50]
+            },
+            editable: {
+                confirmation: "您确定要删除这个记录?",
+                mode: "popup"
+            },
+            columns: [
+                    { field: "id", title: ""},
+                    { field: "pokerResult", title: "发牌结果集"},
+                    { field: "pokerNum", title: "出牌时的牌幅数量"},
+                    { field: "modifyTime", title: "修改时间"},
+                    { field: "pokerSecret", title: "公布明文结果解密时所需密钥"},
+                { field: "createTime", title: "创建时间"},
+                { field: "action", title: "操作", width: "200px", sortable: false, template: kendo.template($("#pokerResult_action_template").html()) }
+            ]
+
+        }).data("kendoGrid");
+
+        bg.window("#pokerResult_modify_dialog", null, {title: "编辑出牌结果表信息"});
+        bg.window("#pokerResult_detail_dialog", null, {title: "出牌结果表信息"});
+
+        $("#pokerResult_search_btn").click(function(){
+            var descriptor = {};
+            var search_text = $("#search_key").val();
+            var search_val = $("#pokerResult_search_text").val();
+            if(search_val){
+                descriptor.field = search_text;
+                descriptor.value = search_val;
+                descriptor.operator = $("#search_eq").val();
+                descriptor.logic = "and";
+            }
+            pokerResult_grid.dataSource.read({"filters":[descriptor]});
+        });
+
+        $("#pokerResult_add").click(function () {
+            bg.refreshWindow("#pokerResult_modify_dialog", "/pokerResult/add");
+        });
+
+        $("#pokerResult_export").click(function () {
+            pokerResult_grid.saveAsExcel();
+        });
+
+    });
+
+    var deletePokerResult = function(id) {
+        bg.deleteObj(id, "/v1/pokerResult/delete/"+id, "#pokerResult_grid");
+    };
+
+    var detailPokerResult = function (id) {
+        bg.refreshWindow("#pokerResult_detail_dialog", "/pokerResult/detail/"+id);
+    };
+
+    var modifyPokerResult = function (id) {
+        bg.refreshWindow("#pokerResult_modify_dialog", "/pokerResult/edit/"+id);
+    };
+
+
+</script>
+
+<!-- 全局js -->
+<script th:src="@{/static/js/bootstrap.min.js}"></script>
+<script th:src="@{/static/js/plugins/layer/layer.min.js}"></script>
+
+<script th:src="@{/static/js/plugins/sweetalert2/sweetalert2.all.js}"></script>
+<script th:src="@{/static/js/CommonUtils.js}"></script>
+<script th:src="@{/static/js/ajaxCallbackError.js}"></script>
+
+<!--begin: kendoUI-->
+<script th:src="@{/static/js/plugins/kendoUI/js/kendo.all.min.js(v=3.1415926)}" type="text/javascript"></script>
+<script th:src="@{/static/js/plugins/kendoUI/js/kendo.timezones.min.js(v=3.1415926)}" type="text/javascript"></script>
+<script th:src="@{/static/js/plugins/kendoUI/js/jszip.min.js(v=3.1415926)}" type="text/javascript"></script>
+<script th:src="@{/static/js/plugins/kendoUI/js/messages/kendo.messages.zh-CN.min.js(v=3.1415926)}"
+        type="text/javascript"></script>
+<script th:src="@{/static/js/plugins/kendoUI/js/cultures/kendo.culture.zh-CN.min.js(v=3.1415926)}"
+        type="text/javascript"></script>
+<!--end: kendoUI-->
+
+</body>
+
+</html>

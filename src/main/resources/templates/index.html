@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/index.css" />
+		<script src="js/jquery.min.js"></script>
+		<title>链彩游戏主页</title>
+	</head>
+	<style type="text/css">
+	.warp{
+		width:1200px;
+		margin:0 auto;
+		}
+		a{
+			text-decoration: none;
+		}
+	</style>
+	<body>
+		<div id="container">
+			<div class="header">
+				<div class="header_warp">
+					<div class="logo"><img src="./img/chain_game.png"/></div>
+					<a class="button" href='./record'><img src="img/btn_jieguo .png"/></a>
+					<div class="index"style='line-height: 100px;'><img src="./img/shape.png" style='position: relative;top:8px;'/>主页</div>
+			   </div>
+			</div>
+			<div class="con_bg">
+				<div class="block_chain">
+					<div class="title">链彩区块链棋牌校验</div>
+					<span style="margin-top:40px;">链彩游戏是包含区块链的去中心化应用DAPP，是研发团队推出的第一款智能合约应用。每笔交易都是由应用发起者通过智能合约交易触发，记录在区块链浏览器上，安全，匿名，不可更改。独创棋牌排序上链，每局棋牌排序由应用发起者
+						通过智能合约交易触发，棋牌排序将被记录在区块链浏览器上，并永不可更改；牌局结束后，应用发起者或参与者通过合约交易公布牌序。</span><br />
+                    <span>当前市面上互联网竞猜平台所采用的都是中心化的商业模式—由机构或某个公司运营，这意味着参与竞猜的用户可能会出现吃票、黑彩、作假，游戏规则不透明等暗箱操作手段让广大用户担心。</span><br />
+                    <span>此DAPP继承了区块链技术的特点和优点，它将完美解决当前竞猜行业的不合理之处：包括传统竞猜平台饱受诟病的低额回报率；可供参与竞猜的产品匮乏；传统竞猜平台运营的不公开不透明、法律风险、资金安全问题以及对运营者作弊行为的疑虑等等。</span> 
+                    <a class="btn" href='./record.html'><img src="img/btn_2.png"/></a>
+				</div>	
+			</div>
+			<div class="process">
+				<div class="warp">
+					<div class="process_list">
+					<div class="tit">牌序上链基本流程如下</div>
+					<span style="margin-top:20px;">1、将牌序计算代码公开于github等开源代码网站；</span>
+					<span>2、所有有牌序游戏，都将使用牌序计算代码生成的牌序；</span>
+					<span>3、通过玩家进入游戏触发牌序算法；</span>
+					<span>4、牌序算法结果将进行非对称加密算法，生成密文、私钥（private key）上链；</span>
+					<span>3、上链后可在区块链浏览器上查看密文；</span>
+					<span>4、玩家触发牌局结束后一段时间，区块链私钥公开；</span>
+					<span>5、通过本平台或第三方非对称加密平台，输入密文及私钥解密；</span>
+					<span>6、解密结果通过平台提供的文字和图形转化为棋牌内容展示；</span>
+					<span style="margin-top:60px;color:#FF6600">以百家乐为例</span>
+					<span style="color:#FF6600">8副扑克，除去大小王，共计416张。</span>
+					<span style="color:#FF6600">牌局结束后2小时，使用密文和对应公钥（public key），可解出416张牌顺序</span>
+				    </div>
+				</div>
+			</div>
+			<div class="bg3">
+				<div class="warp">
+					<div class="ti">权威开源网站-源码链接</div>
+					<a class="china_first" href='https://gitee.com/lianshen168999/poker-random' target="_blank">
+						<img src="img/kai1.png" alt="" />
+						<span>中国第一大开源网站</span>
+						<span style="color:#A4A4A4;padding-top:22px;">https://gitee.com/lianshen168999/poker-random</span>
+					</a>
+					<a class="world_first" href='https://github.com/liancai168999/poker-random' target="_blank">
+						<img src="img/kai2.png" alt="" />
+						<span>世界第一大开源网站</span>
+						<span style="color:#A4A4A4;padding-top:22px;">https://github.com/liancai168999/poker-random</span>
+					</a>
+				</div>
+			</div>
+			<div class="encrypt_website">
+				<div class="warp">
+					<div class="ti">非对称加密网站</div>
+					<div class="decipher_bg">
+						<a  href='http://tool.chacuo.net/cryptrsapubkey' target="_blank" class="decipher" >
+							<img src="img/suo.png" alt="" />
+							<span>世界第一大开源网站</span>
+							<span style="color:#A4A4A4;padding-top:22px;">http://tool.chacuo.net/cryptrsapubkey</span>
+						</a>
+						<a  href='http://tool.chacuo.net/cryptrsapubkey'  target="_blank"  class="decipher">
+							<img src="img/suo.png" alt="" />
+							<span>世界第一大开源网站</span>
+							<span style="color:#A4A4A4;padding-top:22px;">http://tool.chacuo.net/cryptrsapubkey</span>
+						</a>
+						<a href='http://tool.chacuo.net/cryptrsapubkey'  target="_blank"  class="decipher">
+							<img src="img/suo.png" alt="" />
+							<span>世界第一大开源网站</span>
+							<span style="color:#A4A4A4;padding-top:22px;">http://tool.chacuo.net/cryptrsapubkey</span>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="footer">
+				<img src="img/chain_game.png" alt="" />
+			</div>
+		</div>
+	</body>
+</html>
